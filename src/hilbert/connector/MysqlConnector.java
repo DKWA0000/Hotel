@@ -23,7 +23,6 @@ public class MysqlConnector {
             // Drop from root connection (not from inside hotelDB)
             stmt.executeUpdate("DROP DATABASE IF EXISTS hotelDB");
             stmt.executeUpdate("CREATE DATABASE hotelDB");
-            System.out.println("Fresh database created: hotelDB");
         }
     }
 }
