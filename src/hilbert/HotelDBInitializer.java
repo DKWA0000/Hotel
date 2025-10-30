@@ -186,6 +186,13 @@ public class HotelDBInitializer {
                 ps.setString(5, "active");
                 ps.executeUpdate();
 
+                ps.setInt(1, 3);
+                ps.setInt(2, 2);
+                ps.setDate(3, Date.valueOf("2025-09-20"));
+                ps.setDate(4, Date.valueOf("2025-09-30"));
+                ps.setString(5, "paid");
+                ps.executeUpdate();
+
                 System.out.println("Sample bookings inserted.");
             } catch (SQLException e) {
                 e.printStackTrace();
