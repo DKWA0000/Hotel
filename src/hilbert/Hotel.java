@@ -74,7 +74,7 @@ public class Hotel {
                 //Rum
                 case 6 : roomController.addRoom(); break;
                 case 7 : roomController.showAllRooms(); break;
-                case 8 : break;
+                case 8 : roomController.listAvailableRooms(); break;
                 case 9 : break;
                 case 10 : break;
 

@@ -4,6 +4,7 @@ import hilbert.dao.RoomDAOImpl;
 import hilbert.model.Room;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class RoomServiceImpl implements RoomService{
@@ -25,5 +26,11 @@ public class RoomServiceImpl implements RoomService{
         return roomDAO.allRooms();
     }
 
+
+
+    @Override
+    public List<Room> listAvailableRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+        return roomDAO.listAvailableRooms(startDate, endDate);
+    }
 
 }

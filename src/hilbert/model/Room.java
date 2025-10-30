@@ -51,4 +51,9 @@ public class Room {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Room id=" + id + ", roomNumber=" + roomNumber + ", type=" + type + ", price=" + price ;
+    }
 }
