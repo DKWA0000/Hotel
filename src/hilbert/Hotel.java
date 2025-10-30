@@ -1,6 +1,7 @@
 package hilbert;
 
 import hilbert.connector.MysqlConnector;
+import hilbert.controller.RoomControllerImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 
 public class Hotel {
+        private final RoomControllerImpl roomController = new RoomControllerImpl();
 
         public Hotel() {
             try {
@@ -70,7 +72,7 @@ public class Hotel {
                 case 5 : break;
 
                 //Rum
-                case 6 : break;
+                case 6 : roomController.addRoom(); break;
                 case 7 : break;
                 case 8 : break;
                 case 9 : break;

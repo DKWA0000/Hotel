@@ -99,7 +99,7 @@ public class HotelDBInitializer {
             String createRoom = """
                 CREATE TABLE IF NOT EXISTS room (
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    roomnumber VARCHAR(10) NOT NULL,
+                    roomnumber VARCHAR(10) UNIQUE NOT NULL,
                     type VARCHAR(10),
                     price DECIMAL(10,2)
                 )
