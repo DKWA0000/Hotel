@@ -1,6 +1,7 @@
 package hilbert;
 
 import hilbert.connector.MysqlConnector;
+import hilbert.controller.CustomerControllerImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +9,6 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 
 public class Hotel {
-
         public Hotel() {
             try {
                 MysqlConnector.createDatabaseFresh();
@@ -16,6 +16,7 @@ public class Hotel {
             }
                 catch(SQLException e){
                     System.out.println("Database error: " + e.getMessage());
+                    e.printStackTrace();
                 }
             run();
         }
@@ -63,11 +64,11 @@ public class Hotel {
             switch(choice){
 
                 //Kunder
-                case 1 : break;
-                case 2 : break;
-                case 3 : break;
-                case 4 : break;
-                case 5 : break;
+                case 1 : CustomerControllerImpl.addCostumer(br);         break;
+                case 2 : CustomerControllerImpl.getAllCustomers();       break;
+                case 3 : CustomerControllerImpl.findCustomerByEmail(br); break;
+                case 4 : CustomerControllerImpl.updateCity(br);          break;
+                case 5 : CustomerControllerImpl.deleteCustomer(br);      break;
 
                 //Rum
                 case 6 : break;

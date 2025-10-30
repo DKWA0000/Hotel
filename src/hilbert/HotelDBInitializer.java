@@ -37,6 +37,8 @@ public class HotelDBInitializer {
             System.out.println("HotelDB setup completed successfully!");
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -73,6 +75,8 @@ public class HotelDBInitializer {
 //                    System.out.println(c.toString());
                 }
             }
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -81,10 +85,12 @@ public class HotelDBInitializer {
              Statement stmt = conn.createStatement()) {
             stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS HotelDB");
             System.out.println("Database checked/created: HotelDB");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    private static void createTablesIfNotExist() throws SQLException {
+    private static void createTablesIfNotExist() throws SQLException, ClassNotFoundException {
         try (Connection conn = MysqlConnector.getConnection()) {
 
             String createCustomer = """
@@ -113,8 +119,8 @@ public class HotelDBInitializer {
                     checkin_date DATE,
                     checkout_date DATE,
                     status VARCHAR(10),
-                    FOREIGN KEY (customer_id) REFERENCES customer(id),
-                    FOREIGN KEY (room_id) REFERENCES room(id)
+                    FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE,
+                    FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE
                 )
                 """;
 
@@ -126,7 +132,7 @@ public class HotelDBInitializer {
         }
     }
 
-    private static void insertSampleData() throws SQLException {
+    private static void insertSampleData() throws SQLException, ClassNotFoundException {
 
         try (Connection conn = MysqlConnector.getConnection()) {
 

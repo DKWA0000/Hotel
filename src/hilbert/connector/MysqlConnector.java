@@ -11,7 +11,8 @@ public class MysqlConnector {
     private static final String USER = System.getenv("USER");
     private static final String PASSWORD = System.getenv("PASSWORD");
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
+
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
