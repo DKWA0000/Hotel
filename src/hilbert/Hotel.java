@@ -76,7 +76,7 @@ public class Hotel {
                 case 7 : roomController.showAllRooms(); break;
                 case 8 : roomController.listAvailableRooms(); break;
                 case 9 : roomController.updateRoomPrice(); break;
-                case 10 : break;
+                case 10 : roomController.updateRoomType(); break;
 
                 //Bokningar
                 case 11 : break;

@@ -8,6 +8,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class RoomDAOImpl implements RoomDAO {
 
@@ -96,18 +97,60 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public int updateRoomPrice(int id, double price) {
+    public void updateRoomPrice(int id, double price) {
         String sql = "UPDATE room SET price = ? WHERE id = ?";
         try (Connection conn = MysqlConnector.getConnection();
              PreparedStatement statment = conn.prepareStatement(sql)) {
             statment.setDouble(1, price);
             statment.setInt(2, id);
 
-            return statment.executeUpdate();
+            statment.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+    }
+
+    @Override
+    public void updateRoomType(int id, String type) {
+        String insertRoom = "UPDATE room SET type = ? WHERE id = ?";
+
+        try (Connection conn = MysqlConnector.getConnection();
+            PreparedStatement ps = conn.prepareStatement(insertRoom)) {
+
+            ps.setString(1, type);
+            ps.setInt(2, id);
+
+            ps.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            System.out.println("Room number already in use, create a new one.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public Optional<Room> getById(int id) {
+
+        String sql = "SELECT * FROM room where id = ?";
+        try (Connection conn = MysqlConnector.getConnection();
+             PreparedStatement pt = conn.prepareStatement(sql)) {
+            pt.setInt(1, id);
+
+            try (ResultSet rs = pt.executeQuery()) {
+                if (rs.next()) {
+                    return Optional.of(new Room(rs.getInt("id"),
+                            rs.getString("roomNumber"),
+                            rs.getString("type"),
+                            rs.getDouble("price")));
+                }
+            } catch (SQLException e2) {
+                e2.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }

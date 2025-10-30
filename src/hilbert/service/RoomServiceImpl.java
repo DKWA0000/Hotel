@@ -6,6 +6,7 @@ import hilbert.model.Room;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class RoomServiceImpl implements RoomService{
 
@@ -34,8 +35,26 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public int updateRoomPrice(int id, double price) {
-        return roomDAO.updateRoomPrice(id, price);
+    public void updateRoomPrice(int id, double price) {
+        Optional<Room> room = roomDAO.getById(id);
+        if(room.isPresent()){
+            roomDAO.updateRoomPrice(id, price);
+            System.out.println("Room price updated successfully.");
+        } else {
+            System.out.println("Room with id " + id + " does not exist.");
+        }
+    }
+
+    @Override
+    public void updateRoomType(int id, String type) {
+        Optional<Room> room = roomDAO.getById(id);
+        if(room.isPresent()){
+            roomDAO.updateRoomType(id, type);
+            System.out.println("Room updated successfully.");
+        } else {
+            System.out.println("Room with id " + id + " does not exist.");
+        }
+
     }
 
 

@@ -72,4 +72,13 @@ public class RoomControllerImpl implements RoomController {
         double price = Double.parseDouble(sc.nextLine());
         roomService.updateRoomPrice(id, price);
     }
+
+    @Override
+    public void updateRoomType() {
+        System.out.println("Please type the room id you want to update the type: ");
+        int id = Integer.parseInt(sc.nextLine());
+        System.out.println("Please type the new type: ");
+        String type = sc.nextLine();
+        roomService.updateRoomType(id, type);
+    }
 }

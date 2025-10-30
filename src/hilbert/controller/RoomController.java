@@ -11,4 +11,5 @@ public interface RoomController {
     void showAllRooms();
     List<Room> listAvailableRooms();
     void updateRoomPrice();
+    void updateRoomType();
 }
