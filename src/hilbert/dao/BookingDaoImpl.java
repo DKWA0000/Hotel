@@ -67,7 +67,7 @@ public class BookingDaoImpl implements BookingDao{
                                  ") OR" +
                                  "((checkin_date BETWEEN ? AND ?) AND " +
                                  "(checkout_date BETWEEN ? AND ?))" +
-                                 ") AND (room_id = ?))")) {
+                                 ") AND (room_id = ?) AND (status != 'availible'))")) {
                 statement.setString(1, startDate.toString());
                 statement.setString(2, endDate.toString());
                 statement.setString(3, startDate.toString());
