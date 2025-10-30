@@ -49,7 +49,7 @@ public class BookingDaoImpl implements BookingDao{
                 statement.setString(4, booking.getCheckInDate().toString());
                 statement.setString(5, booking.getCheckOutDate().toString());
                 statement.setString(6, booking.getStatus());
-                statement.executeUpdate();
+                return statement.executeUpdate();
             } catch (SQLException e) {
                 System.out.println("Failed to excecute query " + e.getMessage());
             }
