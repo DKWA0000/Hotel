@@ -32,6 +32,9 @@ public class Hotel {
                 catch (IOException e){
                     System.out.println("Make sure not to close bufferedReader before done");
                 }
+                catch (NumberFormatException f){
+                    System.out.println("Enter e number");
+                }
             }
         }
 
@@ -61,7 +64,7 @@ public class Hotel {
             return Integer.parseInt(br.readLine());
         }
 
-        private void menuChoices(BufferedReader br, int choice) throws IOException {
+        private void menuChoices(BufferedReader br, int choice) throws IOException, NumberFormatException {
             switch(choice){
 
                 //Kunder

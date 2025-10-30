@@ -23,7 +23,8 @@ public class RoomControllerImpl implements RoomController {
         System.out.println("Enter room type: ");
         String roomType = sc.nextLine();
         System.out.println("Enter room price: ");
-        double roomPrice = sc.nextDouble();
+        String tmp = sc.nextLine().replaceAll(",", ".");
+        double roomPrice = Double.parseDouble(tmp);
 
         try {
             roomService.addRoom(roomNumber, roomType, roomPrice);
@@ -74,7 +75,7 @@ public class RoomControllerImpl implements RoomController {
     }
 
     @Override
-    public void updateRoomType() {
+    public void updateRoomType() throws NumberFormatException {
         System.out.println("Please type the room id you want to update the type: ");
         int id = Integer.parseInt(sc.nextLine());
         System.out.println("Please type the new type: ");
