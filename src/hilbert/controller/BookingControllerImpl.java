@@ -34,6 +34,10 @@ public class BookingControllerImpl implements BookingController{
     @Override
     public void showAllBookings() {
         List<Booking> bookingsTmp = impl.showAllBookings();
+        if(bookingsTmp.isEmpty()){
+            System.out.println("There are no bookings at the moment");
+            return;
+        }
         for(int i = 0; i < bookingsTmp.size(); i++){
             System.out.println(bookingsTmp.get(i).toString());
         }
@@ -43,6 +47,10 @@ public class BookingControllerImpl implements BookingController{
     public void getBookingByEmail(BufferedReader br) throws IOException {
         System.out.println("Enter email");
         List<Booking> bookingsTmp = impl.getBookingByEmail(br.readLine());
+        if(bookingsTmp.isEmpty()){
+            System.out.println("There are no bookings for this email");
+            return;
+        }
         for(int i = 0; i < bookingsTmp.size(); i++){
             System.out.println(bookingsTmp.get(i).toString());
         }
