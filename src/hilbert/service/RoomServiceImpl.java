@@ -33,4 +33,10 @@ public class RoomServiceImpl implements RoomService{
         return roomDAO.listAvailableRooms(startDate, endDate);
     }
 
+    @Override
+    public int updateRoomPrice(int id, double price) {
+        return roomDAO.updateRoomPrice(id, price);
+    }
+
+
 }

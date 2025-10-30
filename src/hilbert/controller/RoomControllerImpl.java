@@ -63,4 +63,13 @@ public class RoomControllerImpl implements RoomController {
         }
         return List.of();
     }
+
+    @Override
+    public void updateRoomPrice() {
+        System.out.println("Please type the room id you want to update the price for.");
+        int id = Integer.parseInt(sc.nextLine());
+        System.out.println("Please type the new price.");
+        double price = Double.parseDouble(sc.nextLine());
+        roomService.updateRoomPrice(id, price);
+    }
 }

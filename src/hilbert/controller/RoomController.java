@@ -10,4 +10,5 @@ public interface RoomController {
     void addRoom() throws SQLException;
     void showAllRooms();
     List<Room> listAvailableRooms();
+    void updateRoomPrice();
 }

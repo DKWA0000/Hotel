@@ -10,5 +10,5 @@ public interface RoomService {
     void addRoom(String roomNumber, String type, double price) throws SQLException;
     List<Room> allRooms() throws SQLException;
     List<Room> listAvailableRooms(LocalDate startDate, LocalDate endDate) throws SQLException;
-
+    int updateRoomPrice(int id, double price);
 }
