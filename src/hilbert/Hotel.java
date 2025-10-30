@@ -1,6 +1,7 @@
 package hilbert;
 
 import hilbert.connector.MysqlConnector;
+import hilbert.controller.BookingControllerImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -77,8 +78,8 @@ public class Hotel {
                 case 10 : break;
 
                 //Bokningar
-                case 11 : break;
-                case 12 : break;
+                case 11 : new BookingControllerImpl().bookRoom(br); break;
+                case 12 : new BookingControllerImpl().showAllBookings(); break;
                 case 13 : break;
                 case 14 : break;
 
