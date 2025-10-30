@@ -10,6 +10,7 @@ import java.util.List;
 
 public class BookingDaoImpl implements BookingDao{
 
+    @Override
     public List<Booking> getAllBookings() {
         List<Booking> tmp = new ArrayList<>();
         try (Connection connection = MysqlConnector.getConnection();
@@ -33,6 +34,7 @@ public class BookingDaoImpl implements BookingDao{
             return tmp;
         }
 
+        @Override
         public int addBooking(Booking booking){
         if(checkIfBookingValid(booking.getCheckInDate(), booking.getCheckOutDate(), booking.getRoomId())) {
             List<Booking> tmp = new ArrayList<>();
@@ -84,4 +86,44 @@ public class BookingDaoImpl implements BookingDao{
             }
             return true;
         }
+
+        @Override
+        public List<Booking> getBookingByEmail(String email){
+            List<Booking> tmp = new ArrayList<>();
+            try (Connection connection = MysqlConnector.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(
+                         "SELECT * FROM booking " +
+                                 "JOIN customer ON (booking.customer_id = customer.id) " +
+                                 "WHERE (email = ?)")){
+                statement.setString(1, email);
+                ResultSet rs = statement.executeQuery();
+
+                while (rs.next()) {
+                    tmp.add(new Booking(
+                            rs.getInt("id"),
+                            rs.getInt("customer_id"),
+                            rs.getInt("room_id"),
+                            LocalDate.parse(rs.getString("checkin_date")),
+                            LocalDate.parse(rs.getString("checkout_date")),
+                            rs.getString("status")));
+                }
+            }
+            catch (SQLException e){
+                System.out.println("Failed to excecute query " + e.getMessage());
+            }
+            return tmp;
+        }
+
+    @Override
+    public int removeBooking(int booking_id) {
+        try (Connection connection = MysqlConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "DELETE FROM booking WHERE (id = ?)")) {
+            statement.setInt(1, booking_id);
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Failed to excecute query " + e.getMessage());
+        }
+        return 0;
     }
+}

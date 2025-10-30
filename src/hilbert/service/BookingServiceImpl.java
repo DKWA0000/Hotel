@@ -18,4 +18,14 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> showAllBookings() {
         return impl.getAllBookings();
     }
+
+    @Override
+    public List<Booking> getBookingByEmail(String email) {
+        return impl.getBookingByEmail(email);
+    }
+
+    @Override
+    public int removeBooking(int booking_id) {
+        return impl.removeBooking(booking_id);
+    }
 }

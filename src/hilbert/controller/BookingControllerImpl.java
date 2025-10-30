@@ -38,4 +38,25 @@ public class BookingControllerImpl implements BookingController{
             System.out.println(bookingsTmp.get(i).toString());
         }
     }
+
+    @Override
+    public void getBookingByEmail(BufferedReader br) throws IOException {
+        System.out.println("Enter email");
+        List<Booking> bookingsTmp = impl.getBookingByEmail(br.readLine());
+        for(int i = 0; i < bookingsTmp.size(); i++){
+            System.out.println(bookingsTmp.get(i).toString());
+        }
+    }
+
+    @Override
+    public void removeBooking(BufferedReader br) throws IOException {
+        System.out.println("Enter booking id of the booking to remove");
+        int result = impl.removeBooking(Integer.parseInt(br.readLine()));
+        if(result == 1){
+            System.out.println("Bokking was removed");
+            return;
+        }
+        System.out.println("Booking was not removed");
+
+    }
 }

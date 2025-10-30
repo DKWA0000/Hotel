@@ -80,8 +80,8 @@ public class Hotel {
                 //Bokningar
                 case 11 : new BookingControllerImpl().bookRoom(br); break;
                 case 12 : new BookingControllerImpl().showAllBookings(); break;
-                case 13 : break;
-                case 14 : break;
+                case 13 : new BookingControllerImpl().getBookingByEmail(br); break;
+                case 14 : new BookingControllerImpl().removeBooking(br); break;
 
                 case 0 : br.close(); System.exit(0);
             }
