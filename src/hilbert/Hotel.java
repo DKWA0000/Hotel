@@ -1,6 +1,7 @@
 package hilbert;
 
 import hilbert.connector.MysqlConnector;
+import hilbert.controller.RoomControllerImpl;
 import hilbert.controller.BookingControllerImpl;
 
 import java.io.BufferedReader;
@@ -9,6 +10,7 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 
 public class Hotel {
+        private final RoomControllerImpl roomController = new RoomControllerImpl();
 
         public Hotel() {
             try {
@@ -63,7 +65,7 @@ public class Hotel {
             return Integer.parseInt(br.readLine());
         }
 
-        private void menuChoices(BufferedReader br, int choice) throws IOException {
+        private void menuChoices(BufferedReader br, int choice) throws IOException, NumberFormatException {
             switch(choice){
 
                 //Kunder
@@ -74,11 +76,11 @@ public class Hotel {
                 case 5 : break;
 
                 //Rum
-                case 6 : break;
-                case 7 : break;
-                case 8 : break;
-                case 9 : break;
-                case 10 : break;
+                case 6 : roomController.addRoom(); break;
+                case 7 : roomController.showAllRooms(); break;
+                case 8 : roomController.listAvailableRooms(); break;
+                case 9 : roomController.updateRoomPrice(); break;
+                case 10 : roomController.updateRoomType(); break;
 
                 //Bokningar
                 case 11 : new BookingControllerImpl().bookRoom(br); break;

@@ -3,12 +3,18 @@ package hilbert.model;
 public class Room {
 
     private int id;
-    private int roomNumber;
+    private String roomNumber;
     private String type;
     private double price;
 
-    public Room(int id, int roomNumber, String type, double price) {
+    public Room(int id, String roomNumber, String type, double price) {
         this.id = id;
+        this.roomNumber = roomNumber;
+        this.type = type;
+        this.price = price;
+    }
+
+    public Room(String roomNumber, String type, double price) {
         this.roomNumber = roomNumber;
         this.type = type;
         this.price = price;
@@ -18,7 +24,7 @@ public class Room {
         return id;
     }
 
-    public int getRoomNumber() {
+    public String getRoomNumber() {
         return roomNumber;
     }
 
@@ -34,7 +40,7 @@ public class Room {
         this.id = id;
     }
 
-    public void setRoomNumber(int roomNumber) {
+    public void setRoomNumber(String roomNumber) {
         this.roomNumber = roomNumber;
     }
 
@@ -44,5 +50,10 @@ public class Room {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Room id=" + id + ", roomNumber=" + roomNumber + ", type=" + type + ", price=" + price ;
     }
 }
