@@ -23,7 +23,7 @@ public class BookingControllerImpl implements BookingController{
         System.out.println("Input the endDate(YYYY-MM-DD)");
         String endDateTmp = br.readLine();
         int result = impl.addBooking(new Booking(0, customerTmp, roomTmp,
-                LocalDate.parse(startDateTmp), LocalDate.parse(endDateTmp), "active"));
+                LocalDate.parse(startDateTmp), LocalDate.parse(endDateTmp), "unavailable"));
         if(result == 1){
             System.out.println("Room: "  + roomTmp + " is now booked");
             return;

@@ -13,7 +13,7 @@ import java.util.Optional;
 public class RoomDAOImpl implements RoomDAO {
 
     @Override
-    public void addRoom(Room room) throws SQLException {
+    public void addRoom(Room room) throws SQLException, ClassNotFoundException {
         try (Connection conn = MysqlConnector.getConnection()) {
 
             String insertRoom = "INSERT INTO room (roomnumber, type, price) VALUES (?, ?, ?)";
@@ -37,7 +37,7 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public List<Room> allRooms() throws SQLException {
+    public List<Room> allRooms() throws SQLException, ClassNotFoundException {
         try (Connection conn = MysqlConnector.getConnection()) {
             List<Room> rooms = new ArrayList<>();
             String showAllRooms = "SELECT * FROM room";
@@ -57,7 +57,7 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public List<Room> listAvailableRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+    public List<Room> listAvailableRooms(LocalDate startDate, LocalDate endDate) throws SQLException, ClassNotFoundException {
         try (Connection conn = MysqlConnector.getConnection()) {
 
             String sql = """
@@ -86,6 +86,9 @@ public class RoomDAOImpl implements RoomDAO {
                     );
                     rooms.add(r);
                 }
+                if(rooms.isEmpty()) {
+                    System.out.println("No room is available for given dates.");
+                }
                 return rooms;
             } catch (SQLIntegrityConstraintViolationException ex) {
                 System.out.println("Room number already in use, create a new one.");
@@ -108,6 +111,8 @@ public class RoomDAOImpl implements RoomDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -124,7 +129,7 @@ public class RoomDAOImpl implements RoomDAO {
             ps.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException ex) {
             System.out.println("Room number already in use, create a new one.");
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -148,7 +153,7 @@ public class RoomDAOImpl implements RoomDAO {
             } catch (SQLException e2) {
                 e2.printStackTrace();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return Optional.empty();

@@ -118,7 +118,7 @@ public class HotelDBInitializer {
                     room_id INT,
                     checkin_date DATE,
                     checkout_date DATE,
-                    status VARCHAR(10),
+                    status VARCHAR(100),
                     FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE,
                     FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE
                 )

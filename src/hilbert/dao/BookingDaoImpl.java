@@ -28,7 +28,7 @@ public class BookingDaoImpl implements BookingDao{
                         rs.getString("status")));
             }
         }
-            catch (SQLException e){
+            catch (SQLException | ClassNotFoundException e){
                 System.out.println("Failed to excecute query " + e.getMessage());
             }
             return tmp;
@@ -50,7 +50,7 @@ public class BookingDaoImpl implements BookingDao{
                 statement.setString(5, booking.getCheckOutDate().toString());
                 statement.setString(6, booking.getStatus());
                 return statement.executeUpdate();
-            } catch (SQLException e) {
+            } catch (SQLException | ClassNotFoundException e) {
                 System.out.println("Failed to excecute query " + e.getMessage());
             }
         }
@@ -81,7 +81,7 @@ public class BookingDaoImpl implements BookingDao{
                     return false;
                 }
             }
-            catch (SQLException e){
+            catch (SQLException | ClassNotFoundException e){
                 System.out.println("Failed to excecute query " + e.getMessage());
             }
             return true;
@@ -108,7 +108,7 @@ public class BookingDaoImpl implements BookingDao{
                             rs.getString("status")));
                 }
             }
-            catch (SQLException e){
+            catch (SQLException | ClassNotFoundException e){
                 System.out.println("Failed to excecute query " + e.getMessage());
             }
             return tmp;
@@ -121,7 +121,7 @@ public class BookingDaoImpl implements BookingDao{
                      "DELETE FROM booking WHERE (id = ?)")) {
             statement.setInt(1, booking_id);
             return statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Failed to excecute query " + e.getMessage());
         }
         return 0;

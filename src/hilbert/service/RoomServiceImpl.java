@@ -13,7 +13,7 @@ public class RoomServiceImpl implements RoomService{
     private RoomDAOImpl roomDAO = new RoomDAOImpl();
 
     @Override
-    public void addRoom(String roomNumber, String type, double price) throws SQLException {
+    public void addRoom(String roomNumber, String type, double price) throws SQLException, ClassNotFoundException {
         if(price <= 0){
             System.out.println("Price can not be less then zero.");
             return;
@@ -23,14 +23,14 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public List<Room> allRooms() throws SQLException {
+    public List<Room> allRooms() throws SQLException, ClassNotFoundException {
         return roomDAO.allRooms();
     }
 
 
 
     @Override
-    public List<Room> listAvailableRooms(LocalDate startDate, LocalDate endDate) throws SQLException {
+    public List<Room> listAvailableRooms(LocalDate startDate, LocalDate endDate) throws SQLException, ClassNotFoundException {
         return roomDAO.listAvailableRooms(startDate, endDate);
     }
 

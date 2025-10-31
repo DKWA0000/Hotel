@@ -30,6 +30,8 @@ public class RoomControllerImpl implements RoomController {
             roomService.addRoom(roomNumber, roomType, roomPrice);
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -39,6 +41,8 @@ public class RoomControllerImpl implements RoomController {
             List<Room> allrooms  = roomService.allRooms();
             allrooms.forEach(System.out::println);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -61,6 +65,8 @@ public class RoomControllerImpl implements RoomController {
             System.out.println(ex.getMessage());
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return List.of();
     }
