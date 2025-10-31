@@ -69,6 +69,11 @@ public class Hotel {
 
             //Rapporter
             System.out.println("15. Visa antal bokningar per kund");
+
+            //Rapporter
+            System.out.println("18. Visa alla kunder som aldrig bokat");
+
+            //Exit
             System.out.println("0. Exit program");
             return Integer.parseInt(br.readLine());
         }
@@ -98,6 +103,10 @@ public class Hotel {
                 case 16 : new BookingControllerImpl().getAveragePriceBooked(); break;
 
                 case 15: new BookingControllerImpl().getNumberBookingPerCustomer(br); break;
+                //Rapporter
+                case 18 : CustomerControllerImpl.listCustomersWithoutBookings(); break;
+
+                //Exit
                 case 0 : br.close(); System.exit(0);
             }
         }

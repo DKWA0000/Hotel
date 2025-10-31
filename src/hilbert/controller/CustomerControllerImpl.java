@@ -56,4 +56,19 @@ public class CustomerControllerImpl {
         CustomerDaoImpl cdi = new CustomerDaoImpl();
         cdi.deleteCustomer(id);
     }
+
+    public static void listCustomersWithoutBookings() {
+        CustomerDaoImpl cdi = new CustomerDaoImpl();
+        List<Customer> customers = cdi.getCustomersWithoutBookings();
+
+        if (customers.isEmpty()) {
+            System.out.println("All customers have made at least one booking.");
+        } else {
+            System.out.println("Customers without bookings:");
+            for (Customer c : customers) {
+                System.out.println("- " + c.getName() + " (" + c.getEmail() + ")");
+            }
+        }
+    }
+
 }
