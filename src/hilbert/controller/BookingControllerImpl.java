@@ -67,4 +67,10 @@ public class BookingControllerImpl implements BookingController{
         System.out.println("Booking was not removed");
 
     }
+
+    @Override
+    public void getNumberBookingPerCustomer(BufferedReader br) throws IOException {
+        System.out.println("Enter customer email to see the number of the bookings");
+        impl.getNumberBookingPerCustomer(br.readLine());
+    }
 }

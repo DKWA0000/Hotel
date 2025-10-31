@@ -10,4 +10,6 @@ public interface BookingService {
     List<Booking> showAllBookings();
     List<Booking> getBookingByEmail(String email);
     int removeBooking(int booking_id);
+
+    void getNumberBookingPerCustomer(String email);
 }

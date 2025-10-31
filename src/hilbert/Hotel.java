@@ -63,6 +63,9 @@ public class Hotel {
             System.out.println("12. Lista alla bokningar");
             System.out.println("13. Sök bokningar via e-post");
             System.out.println("14. Avboka rum");
+
+            //Rapporter
+            System.out.println("15. Visa antal bokningar per kund");
             System.out.println("0. Exit program");
             return Integer.parseInt(br.readLine());
         }
@@ -90,6 +93,7 @@ public class Hotel {
                 case 13 : new BookingControllerImpl().getBookingByEmail(br); break;
                 case 14 : new BookingControllerImpl().removeBooking(br); break;
 
+                case 15: new BookingControllerImpl().getNumberBookingPerCustomer(br); break;
                 case 0 : br.close(); System.exit(0);
             }
         }

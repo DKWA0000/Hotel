@@ -9,4 +9,6 @@ public interface BookingController {
     void showAllBookings();
     void getBookingByEmail(BufferedReader br) throws IOException;
     void removeBooking(BufferedReader br) throws IOException;
+
+    void getNumberBookingPerCustomer(BufferedReader br) throws IOException;;
 }
