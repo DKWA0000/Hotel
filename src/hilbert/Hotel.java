@@ -64,13 +64,10 @@ public class Hotel {
             System.out.println("12. Lista alla bokningar");
             System.out.println("13. Sök bokningar via e-post");
             System.out.println("14. Avboka rum");
-            System.out.println("16. Visa genomsnittspris på bokade rum");
-
 
             //Rapporter
             System.out.println("15. Visa antal bokningar per kund");
-
-            //Rapporter
+            System.out.println("16. Visa genomsnittspris på bokade rum");
             System.out.println("18. Visa alla kunder som aldrig bokat");
 
             //Exit
@@ -100,10 +97,10 @@ public class Hotel {
                 case 12 : new BookingControllerImpl().showAllBookings(); break;
                 case 13 : new BookingControllerImpl().getBookingByEmail(br); break;
                 case 14 : new BookingControllerImpl().removeBooking(br); break;
-                case 16 : new BookingControllerImpl().getAveragePriceBooked(); break;
 
-                case 15: new BookingControllerImpl().getNumberBookingPerCustomer(br); break;
                 //Rapporter
+                case 15: new BookingControllerImpl().getNumberBookingPerCustomer(br); break;
+                case 16 : new BookingControllerImpl().getAveragePriceBooked(); break;
                 case 18 : CustomerControllerImpl.listCustomersWithoutBookings(); break;
 
                 //Exit
