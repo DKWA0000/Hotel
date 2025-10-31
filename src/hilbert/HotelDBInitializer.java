@@ -37,6 +37,8 @@ public class HotelDBInitializer {
             System.out.println("HotelDB setup completed successfully!");
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -73,6 +75,8 @@ public class HotelDBInitializer {
 //                    System.out.println(c.toString());
                 }
             }
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -81,10 +85,12 @@ public class HotelDBInitializer {
              Statement stmt = conn.createStatement()) {
             stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS HotelDB");
             System.out.println("Database checked/created: HotelDB");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    private static void createTablesIfNotExist() throws SQLException {
+    private static void createTablesIfNotExist() throws SQLException, ClassNotFoundException {
         try (Connection conn = MysqlConnector.getConnection()) {
 
             String createCustomer = """
@@ -99,8 +105,8 @@ public class HotelDBInitializer {
             String createRoom = """
                 CREATE TABLE IF NOT EXISTS room (
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    roomnumber VARCHAR(10) NOT NULL,
-                    type VARCHAR(10),
+                    roomnumber VARCHAR(10) UNIQUE NOT NULL,
+                    type VARCHAR(250),
                     price DECIMAL(10,2)
                 )
                 """;
@@ -112,9 +118,9 @@ public class HotelDBInitializer {
                     room_id INT,
                     checkin_date DATE,
                     checkout_date DATE,
-                    status VARCHAR(10),
-                    FOREIGN KEY (customer_id) REFERENCES customer(id),
-                    FOREIGN KEY (room_id) REFERENCES room(id)
+                    status VARCHAR(100),
+                    FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE,
+                    FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE
                 )
                 """;
 
@@ -126,7 +132,7 @@ public class HotelDBInitializer {
         }
     }
 
-    private static void insertSampleData() throws SQLException {
+    private static void insertSampleData() throws SQLException, ClassNotFoundException {
 
         try (Connection conn = MysqlConnector.getConnection()) {
 
@@ -176,14 +182,21 @@ public class HotelDBInitializer {
                 ps.setInt(2, 1);
                 ps.setDate(3, Date.valueOf("2025-10-23"));
                 ps.setDate(4, Date.valueOf("2025-10-25"));
-                ps.setString(5, "active");
+                ps.setString(5, "unavailable");
                 ps.executeUpdate();
 
                 ps.setInt(1, 2);
                 ps.setInt(2, 2);
                 ps.setDate(3, Date.valueOf("2025-10-24"));
                 ps.setDate(4, Date.valueOf("2025-10-26"));
-                ps.setString(5, "active");
+                ps.setString(5, "unavailable");
+                ps.executeUpdate();
+
+                ps.setInt(1, 2);
+                ps.setInt(2, 2);
+                ps.setDate(3, Date.valueOf("2025-09-20"));
+                ps.setDate(4, Date.valueOf("2025-09-30"));
+                ps.setString(5, "availible");
                 ps.executeUpdate();
 
                 System.out.println("Sample bookings inserted.");

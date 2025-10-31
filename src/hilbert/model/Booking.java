@@ -9,13 +9,16 @@ public class Booking {
     private int roomId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
+    private String status;
 
-    public Booking(int id, int customerId, int roomId, LocalDate checkInDate, LocalDate checkOutDate) {
+    public Booking(int id, int customerId, int roomId, LocalDate checkInDate,
+                   LocalDate checkOutDate, String status) {
         this.id = id;
         this.customerId = customerId;
         this.roomId = roomId;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
+        this.status = status;
     }
 
     public int getId() {
@@ -56,5 +59,25 @@ public class Booking {
 
     public void setCheckOutDate(LocalDate checkOutDate) {
         this.checkOutDate = checkOutDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id=" + id +
+                ", customerId=" + customerId +
+                ", roomId=" + roomId +
+                ", checkInDate=" + checkInDate +
+                ", checkOutDate=" + checkOutDate +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
