@@ -65,7 +65,7 @@ public class RoomDAOImpl implements RoomDAO {
                           FROM room r
                           LEFT JOIN booking b 
                               ON r.id = b.room_id
-                              AND b.status = 'ACTIVE'
+                              AND b.status = 'unavailable'
                               AND (b.checkin_date >= ? AND b.checkout_date <= ?)
                           WHERE b.id IS NULL
                     """;

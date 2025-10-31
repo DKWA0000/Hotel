@@ -112,7 +112,7 @@ public class HotelDBInitializer {
                     room_id INT,
                     checkin_date DATE,
                     checkout_date DATE,
-                    status VARCHAR(10),
+                    status VARCHAR(100),
                     FOREIGN KEY (customer_id) REFERENCES customer(id),
                     FOREIGN KEY (room_id) REFERENCES room(id)
                 )
@@ -176,21 +176,21 @@ public class HotelDBInitializer {
                 ps.setInt(2, 1);
                 ps.setDate(3, Date.valueOf("2025-10-23"));
                 ps.setDate(4, Date.valueOf("2025-10-25"));
-                ps.setString(5, "active");
+                ps.setString(5, "unavailable");
                 ps.executeUpdate();
 
                 ps.setInt(1, 2);
                 ps.setInt(2, 2);
                 ps.setDate(3, Date.valueOf("2025-10-24"));
                 ps.setDate(4, Date.valueOf("2025-10-26"));
-                ps.setString(5, "active");
+                ps.setString(5, "unavailable");
                 ps.executeUpdate();
 
                 ps.setInt(1, 2);
                 ps.setInt(2, 2);
                 ps.setDate(3, Date.valueOf("2025-09-20"));
                 ps.setDate(4, Date.valueOf("2025-09-30"));
-                ps.setString(5, "paid");
+                ps.setString(5, "availible");
                 ps.executeUpdate();
 
                 System.out.println("Sample bookings inserted.");
