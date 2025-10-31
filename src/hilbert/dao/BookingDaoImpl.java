@@ -2,6 +2,7 @@ package hilbert.dao;
 
 import hilbert.connector.MysqlConnector;
 import hilbert.model.Booking;
+import hilbert.model.Customer;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -122,6 +123,22 @@ public class BookingDaoImpl implements BookingDao{
             statement.setInt(1, booking_id);
             return statement.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Failed to excecute query " + e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public int getNumberBookingPerCustomer(int customer_id) {
+        try (Connection connection = MysqlConnector.getConnection();
+             Statement statement = connection.createStatement()) {
+            String sql = "SELECT count(b.customer_id) as total_number from booking b where customer_id = " + customer_id + " group by b.customer_id";
+            ResultSet result = statement.executeQuery(sql);
+            if(result.next()) {
+                return result.getInt("total_number");
+            }
+        }
+        catch (SQLException | ClassNotFoundException e){
             System.out.println("Failed to excecute query " + e.getMessage());
         }
         return 0;

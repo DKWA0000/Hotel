@@ -11,4 +11,5 @@ public interface BookingDao {
     List<Booking> getBookingByEmail(String email);
     int removeBooking(int booking_id);
 
+    int getNumberBookingPerCustomer(int customer_id);
 }
