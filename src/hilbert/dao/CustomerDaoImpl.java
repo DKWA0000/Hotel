@@ -3,10 +3,7 @@ package hilbert.dao;
 import hilbert.connector.MysqlConnector;
 import hilbert.model.Customer;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,4 +99,28 @@ public class CustomerDaoImpl implements CustomerDao {
         }
     }
 
+    @Override
+    public List<Customer> getCustomersWithoutBookings() {
+        List<Customer> customers = new ArrayList<>();
+        String sql = "SELECT * FROM customer WHERE id NOT IN (SELECT DISTINCT customer_id FROM booking)";
+
+        try (Connection conn = MysqlConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Customer customer = new Customer(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("city"));
+                customers.add(customer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return customers;
+    }
 }
