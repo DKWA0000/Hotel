@@ -67,4 +67,10 @@ public class BookingControllerImpl implements BookingController{
         System.out.println("Booking was not removed");
 
     }
+
+    @Override
+    public void getAveragePriceBooked() {
+        System.out.println("Genomsnitts-priset för bokade rum är: " +
+                impl.getAveragePriceBooked());
+    }
 }

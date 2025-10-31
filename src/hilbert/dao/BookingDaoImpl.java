@@ -126,4 +126,21 @@ public class BookingDaoImpl implements BookingDao{
         }
         return 0;
     }
+
+    @Override
+    public double getAveragePriceBooked() {
+        try (Connection connection = MysqlConnector.getConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery("""
+                    SELECT ROUND(AVG(price), 2) FROM room
+                    JOIN booking ON (room.id = booking.room_id)
+                    WHERE (status != 'availible')
+                    """);
+            rs.next();
+            return rs.getDouble(1);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Failed to excecute query " + e.getMessage());
+        }
+        return 0.0;
+    }
 }

@@ -28,4 +28,9 @@ public class BookingServiceImpl implements BookingService {
     public int removeBooking(int booking_id) {
         return impl.removeBooking(booking_id);
     }
+
+    @Override
+    public double getAveragePriceBooked() {
+        return impl.getAveragePriceBooked();
+    }
 }
