@@ -11,4 +11,5 @@ public interface BookingController {
     void removeBooking(BufferedReader br) throws IOException;
 
     void getNumberBookingPerCustomer(BufferedReader br) throws IOException;;
+    void getAveragePriceBooked();
 }

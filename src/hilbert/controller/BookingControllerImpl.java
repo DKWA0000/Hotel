@@ -69,6 +69,12 @@ public class BookingControllerImpl implements BookingController{
     }
 
     @Override
+    public void getAveragePriceBooked() {
+        System.out.println("Genomsnitts-priset för bokade rum är: " +
+                impl.getAveragePriceBooked());
+    }
+
+    @Override
     public void getNumberBookingPerCustomer(BufferedReader br) throws IOException {
         System.out.println("Enter customer email to see the number of the bookings");
         impl.getNumberBookingPerCustomer(br.readLine());

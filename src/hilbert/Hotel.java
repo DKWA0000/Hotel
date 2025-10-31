@@ -4,6 +4,7 @@ import hilbert.connector.MysqlConnector;
 import hilbert.controller.RoomControllerImpl;
 import hilbert.controller.BookingControllerImpl;
 import hilbert.controller.CustomerControllerImpl;
+import hilbert.dao.BookingDaoImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -63,6 +64,8 @@ public class Hotel {
             System.out.println("12. Lista alla bokningar");
             System.out.println("13. Sök bokningar via e-post");
             System.out.println("14. Avboka rum");
+            System.out.println("16. Visa genomsnittspris på bokade rum");
+
 
             //Rapporter
             System.out.println("15. Visa antal bokningar per kund");
@@ -92,6 +95,7 @@ public class Hotel {
                 case 12 : new BookingControllerImpl().showAllBookings(); break;
                 case 13 : new BookingControllerImpl().getBookingByEmail(br); break;
                 case 14 : new BookingControllerImpl().removeBooking(br); break;
+                case 16 : new BookingControllerImpl().getAveragePriceBooked(); break;
 
                 case 15: new BookingControllerImpl().getNumberBookingPerCustomer(br); break;
                 case 0 : br.close(); System.exit(0);

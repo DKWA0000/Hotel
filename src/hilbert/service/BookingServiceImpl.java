@@ -33,6 +33,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public double getAveragePriceBooked() {
+        return impl.getAveragePriceBooked();
+    }
+
+    @Override
     public void getNumberBookingPerCustomer(String email) {
         List<Customer> customer = new CustomerDaoImpl().findCustomerByEmail(email);
         if(customer.isEmpty()) {

@@ -10,6 +10,7 @@ public interface BookingDao {
     int addBooking(Booking booking);
     List<Booking> getBookingByEmail(String email);
     int removeBooking(int booking_id);
+    double getAveragePriceBooked();
 
     int getNumberBookingPerCustomer(int customer_id);
 }

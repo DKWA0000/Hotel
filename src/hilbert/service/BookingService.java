@@ -12,4 +12,5 @@ public interface BookingService {
     int removeBooking(int booking_id);
 
     void getNumberBookingPerCustomer(String email);
+    double getAveragePriceBooked();
 }
