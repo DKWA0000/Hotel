@@ -1,0 +1,77 @@
+@startuml
+!pragma layout smetana
+package hilbert.model {
+    class Hotel {
+        -id: int
+        -name: String
+        -location: String
+        +getId()
+        +getName()
+        +getLocation()
+    }
+    class Room {
+        -roomNumber: int
+        -type: String
+        -price: double
+        +getRoomNumber()
+        +getType()
+        +getPrice()
+    }
+    class Customer {
+        -id: int
+        -name: String
+        -email: String
+        +getId()
+        +getName()
+        +getEmail()
+    }
+    class Booking {
+        -id: int
+        -customerId: int
+        -roomId: int
+        -checkIn: Date
+        -checkOut: Date
+        +getCustomer()
+        +getRoom()
+    }
+}
+package hilbert.dao {
+    interface CustomerDao {
+        +addCustomer(Customer)
+        +getCustomerById(int)
+    }
+    class CustomerDaoImpl implements CustomerDao
+    interface RoomDAO {
+        +getAllRooms()
+        +addRoom(Room)
+    }
+    class RoomDAOImpl implements RoomDAO
+    interface BookingDao {
+        +addBooking(Booking)
+        +getBookingsByCustomer(int)
+    }
+    class BookingDaoImpl implements BookingDao
+}
+package hilbert.service {
+    interface RoomService
+    interface CustomerService
+    interface BookingService
+}
+package hilbert.controller {
+    interface RoomController
+    class RoomControllerImpl implements RoomController
+    interface CustomerController
+    class CustomerControllerImpl implements CustomerController
+    interface BookingController
+    class BookingControllerImpl implements BookingController
+}
+hilbert.dao.BookingDaoImpl --> hilbert.model.Booking
+hilbert.dao.CustomerDaoImpl --> hilbert.model.Customer
+hilbert.dao.RoomDAOImpl --> hilbert.model.Room
+hilbert.controller.BookingControllerImpl --> hilbert.service.BookingService
+hilbert.controller.CustomerControllerImpl --> hilbert.service.CustomerService
+hilbert.controller.RoomControllerImpl --> hilbert.service.RoomService
+hilbert.service.BookingService --> hilbert.dao.BookingDao
+hilbert.service.CustomerService --> hilbert.dao.CustomerDao
+hilbert.service.RoomService --> hilbert.dao.RoomDAO
+@enduml

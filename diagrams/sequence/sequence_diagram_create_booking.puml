@@ -1,0 +1,16 @@
+@startuml
+!pragma layout smetana
+actor "Customer" as C
+participant "BookingControllerImpl" as Ctrl
+participant "BookingServiceImpl" as Srv
+participant "BookingDaoImpl" as Dao
+participant "MysqlConnector" as DB
+C -> Ctrl: createBooking(customerId, roomId, dates)
+Ctrl -> Srv: validateAndCreateBooking()
+Srv -> Dao: insertBooking(Booking)
+Dao -> DB: execute SQL INSERT
+DB --> Dao: success
+Dao --> Srv: booking created
+Srv --> Ctrl: confirmation object
+Ctrl --> C: Booking confirmation
+@enduml
